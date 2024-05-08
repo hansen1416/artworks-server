@@ -37,6 +37,8 @@ def load_csv(file_path, conn):
 
             # print(insert_query)
 
+            # todo check the column type, if its integer, convert the value to integer
+
             # Execute the query with the values tuple
             cur.execute(insert_query, (values,))
 
