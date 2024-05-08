@@ -65,8 +65,6 @@ def postgres_connection():
 
 if __name__ == "__main__":
 
-    from sqlalchemy import create_engine
-
     # for postgreSQL database credentials can be written as
 
     file_path = "objects.csv"
