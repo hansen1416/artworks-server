@@ -138,6 +138,7 @@ if __name__ == "__main__":
     # for postgreSQL database credentials can be written as
 
     file_path = "objects.csv"
+    file_path = "published_images.csv"
 
     conn = postgres_connection()
 
