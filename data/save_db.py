@@ -11,7 +11,8 @@ def load_csv(file_path, conn):
 
     # get the file name from the file path
     file_name = os.path.basename(file_path)
-    tanble_name = file_name.split(".")[0]
+    table_name = file_name.split(".")[0]
+    table_schema = "public"
 
     # Create a cursor object
     cur = conn.cursor()
@@ -25,15 +26,26 @@ def load_csv(file_path, conn):
         column_names = None
 
         for i, row in enumerate(reader):
+
             if i == 0:
                 # Get column names and values from the dictionary
                 column_names = ", ".join(row)
+
+                column_query = "SELECT column_name, data_type, is_nullable FROM information_schema.columns"
+                +f" WHERE table_schema = '{table_schema}' AND table_name = '{table_name}';"
+
+                res = cur.execute(column_query)
+                #
+                print(res)
+
+                conn.commit()
+
                 continue
 
             values = tuple(row)  # Convert dictionary values to a tuple for placeholder
 
             # Construct the INSERT statement with placeholder for values
-            insert_query = f"INSERT INTO {tanble_name} ({column_names}) VALUES %s"
+            insert_query = f"INSERT INTO {table_name} ({column_names}) VALUES %s"
 
             # print(insert_query)
 
