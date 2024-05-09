@@ -7,6 +7,39 @@ import psycopg2
 dotenv.load_dotenv()
 
 
+def clean_row(row, column_names, column_attributes):
+    for i, data in enumerate(row):
+
+        col_name = column_names[i]
+        col_attr = column_attributes[col_name]
+
+        # when insert empty string to an integer column, convert it to None or 0
+        if data == "" and col_attr[0] == "integer":
+
+            if col_attr[1] == "YES":
+                row[i] = None
+            else:
+                row[i] = 0
+
+    return row
+
+
+def insert_rows(cursor, conn, table_name, column_names_str, rows):
+
+    records_list_template = ",".join(["%s"] * len(rows))
+
+    insert_query = (
+        f"INSERT INTO {table_name} ({column_names_str}) VALUES {records_list_template}"
+    )
+
+    # print(insert_query)
+    # print(tuple(rows))
+
+    cursor.execute(insert_query, rows)
+
+    conn.commit()
+
+
 def load_csv(file_path, conn):
 
     # get the file name from the file path
@@ -17,45 +50,68 @@ def load_csv(file_path, conn):
     # Create a cursor object
     cur = conn.cursor()
 
+    # get the column attributes from the database
+    cur.execute(
+        f"SELECT column_name, data_type, is_nullable FROM information_schema.columns"
+        + f" WHERE table_schema = '{table_schema}' AND table_name = '{table_name}';"
+    )
+
+    column_attributes_list = cur.fetchall()
+    # {'objectid': ('integer', 'NO'), 'uuid': ('character varying', 'YES'), 'accessioned': ('integer', 'NO'),...}
+    column_attributes = {}
+
+    for column in column_attributes_list:
+        column_attributes[column[0]] = column[1:]
+
+    conn.commit()
+
     with open(file_path, "r", encoding="utf-8") as f:
         reader = csv.reader(f, delimiter=",")
 
         # iterate over the rows in the file
 
-        # headers = []
-        column_names = None
+        column_names = next(reader)
+        column_names_str = ", ".join(column_names)
 
-        for i, row in enumerate(reader):
+        count = 1
 
-            if i == 0:
-                # Get column names and values from the dictionary
-                column_names = ", ".join(row)
+        try:
 
-                column_query = "SELECT column_name, data_type, is_nullable FROM information_schema.columns"
-                +f" WHERE table_schema = '{table_schema}' AND table_name = '{table_name}';"
+            rows_data = []
 
-                res = cur.execute(column_query)
-                #
-                print(res)
+            row = next(reader)
 
-                conn.commit()
+            while row:
 
-                continue
+                row = clean_row(row, column_names, column_attributes)
 
-            values = tuple(row)  # Convert dictionary values to a tuple for placeholder
+                rows_data.append(tuple(row))
 
-            # Construct the INSERT statement with placeholder for values
-            insert_query = f"INSERT INTO {table_name} ({column_names}) VALUES %s"
+                if len(rows_data) == 1000:
 
-            # print(insert_query)
+                    insert_rows(cur, conn, table_name, column_names_str, rows_data)
 
-            # todo check the column type, if its integer, convert the value to integer
+                    print(
+                        f"Inserted {count-len(rows_data)} - {count} rows into {table_name}"
+                    )
 
-            # Execute the query with the values tuple
-            cur.execute(insert_query, (values,))
+                    rows_data = []
 
-            # Commit the changes to the database
-            conn.commit()
+                count += 1
+
+                row = next(reader)
+
+        except StopIteration:
+
+            if len(rows_data) > 0:
+
+                insert_rows(cur, conn, table_name, column_names_str, rows_data)
+
+                print(
+                    f"Inserted {count-len(rows_data)} - {count} rows into {table_name}"
+                )
+
+            print("End of file reached")
 
         # Close the connection
         cur.close()
