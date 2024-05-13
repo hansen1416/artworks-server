@@ -35,11 +35,13 @@ def home():
     cur = conn.cursor()
 
     columns = [
+        "t1.depictstmsobjectid",
         "t1.uuid",
         "t1.title",
         "t1.displayDate",
         "t1.beginYear",
         "t1.endYear",
+        "t2.objectID",
         "t2.iiifURL",
         "t2.iiifThumbURL",
         "t2.viewtype",
@@ -51,7 +53,7 @@ def home():
     query = (
         f"SELECT {','.join(columns)}"
         + f" FROM published_images as t2 "
-        + f" left join objects as t1 on t1.uuid = t2.uuid"
+        + f" left join objects as t1 on t1.depictstmsobjectid = t2.objectID"
         + f" limit 10;"
     )
 
