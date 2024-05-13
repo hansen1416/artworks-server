@@ -137,8 +137,8 @@ if __name__ == "__main__":
 
     # for postgreSQL database credentials can be written as
 
-    csv_data_path = os.path.abspath(
-        os.path.join("~", "NationalGalleryOfArt-opendata", "data")
+    csv_data_path = os.path.join(
+        os.path.expanduser("~"), "NationalGalleryOfArt-opendata", "data"
     )
 
     # list all the files in the directory
