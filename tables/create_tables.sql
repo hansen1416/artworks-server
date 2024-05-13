@@ -211,6 +211,12 @@ CREATE TABLE published_images (
   assistivetext TEXT NULL                -- text for visually impaired
 );
 
+-- sudo -u postgres psql
+
+-- ALTER USER postgres WITH PASSWORD 'new_password';
+
+-- psql -h 127.0.0.1 -U postgres
+
 -- psql -d "dbname='postgres' user='postgres' password='yourPasswd' host='localhost'" -f yourFileName.sql
 
 -- DROP SCHEMA public CASCADE;

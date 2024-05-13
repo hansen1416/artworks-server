@@ -136,21 +136,19 @@ def postgres_connection():
 if __name__ == "__main__":
 
     # for postgreSQL database credentials can be written as
-    """
-    sudo -u postgres psql
 
-    ALTER USER postgres WITH PASSWORD 'new_password';
+    csv_data_path = os.path.join("~", "NationalGalleryOfArt-opendata", "data")
 
-    psql -h 127.0.0.1 -U postgres
+    # list all the files in the directory
+    for file in os.listdir(csv_data_path):
 
+        file_path = os.path.join(csv_data_path, file)
 
-    """
+        # file_path = "objects.csv"
+        # file_path = "published_images.csv"
 
-    file_path = "objects.csv"
-    file_path = "published_images.csv"
+        conn = postgres_connection()
 
-    conn = postgres_connection()
-
-    load_csv(file_path, conn)
+        load_csv(file_path, conn)
 
     pass
