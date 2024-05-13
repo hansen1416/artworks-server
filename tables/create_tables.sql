@@ -166,7 +166,7 @@ CREATE TABLE objects_historical_data (
   forwardText VARCHAR NULL,
   invertedText VARCHAR NULL,
   remarks VARCHAR NULL,
-  effectiveDate VARCHAR(10) NULL,
+  effectiveDate VARCHAR(10) NULL
   -- PRIMARY KEY (objectID, dataType, displayOrder)  -- composite primary key
 );
 
@@ -192,7 +192,7 @@ CREATE TABLE objects_text_entries (
 );
 
 CREATE TABLE preferred_locations (
-  locationKey VARCHAR(32) NOT NULL PRIMARY KEY,  -- unique key as primary key
+  locationKey VARCHAR(32) NOT NULL,  -- unique key as primary key
   locationType VARCHAR(32) NOT NULL,
   description VARCHAR(512) NOT NULL,
   isPublicVenue INTEGER NOT NULL,

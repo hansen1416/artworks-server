@@ -151,7 +151,7 @@ if __name__ == "__main__":
     files_arr.insert(0, "objects.csv")
 
     # search the position of `media_items.csv` in the list
-    media_items_index = files_arr.index("objects_historical_data.csv")
+    media_items_index = files_arr.index("preferred_locations.csv")
     # keep only the files after `media_items.csv`
     files_arr = files_arr[media_items_index:]
 
