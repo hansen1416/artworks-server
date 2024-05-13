@@ -73,3 +73,12 @@ def home():
     results = [dict(zip(columns_clean, item)) for item in data]
 
     return {"data": results}
+
+
+"""
+[program:artworks]
+command = /root/artworks-server/venv/bin/python3 /root/artworks-server/venv/bin/gunicorn --chdir /root/artworks-server/ --config /root/artworks-server/gunicorn.conf app:app
+user = root  # Replace with your username
+autostart = false
+autorestart = true
+"""
