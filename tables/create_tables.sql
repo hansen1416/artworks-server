@@ -137,7 +137,7 @@ CREATE TABLE objects_constituents (
   endYear INTEGER NULL,
   country VARCHAR(64) NULL,
   zipCode VARCHAR(16) NULL,
-  PRIMARY KEY (objectID, constituentID, roleType, role)  -- composite primary key
+  PRIMARY KEY (objectID, constituentID, displayOrder, roleType, role)  -- composite primary key
 );
 
 CREATE TABLE objects_dimensions (

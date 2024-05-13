@@ -141,8 +141,14 @@ if __name__ == "__main__":
         os.path.expanduser("~"), "NationalGalleryOfArt-opendata", "data"
     )
 
+    files_arr = os.listdir(csv_data_path)
+
+    # move "objects.csv" to the start of the list
+    files_arr.remove("objects.csv")
+    files_arr.insert(0, "objects.csv")
+
     # list all the files in the directory
-    for file in os.listdir(csv_data_path):
+    for file in files_arr:
 
         file_path = os.path.join(csv_data_path, file)
 
