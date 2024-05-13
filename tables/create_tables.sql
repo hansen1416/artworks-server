@@ -187,8 +187,8 @@ CREATE TABLE objects_text_entries (
   objectID INTEGER NOT NULL,  -- foreign key to objects table
   text TEXT NOT NULL,  -- the text itself
   textType VARCHAR(32) NOT NULL,  -- text type
-  year VARCHAR(4) NULL,  -- the year the text was published
-  PRIMARY KEY (objectID, textType)  -- composite primary key
+  year VARCHAR(4) NULL  -- the year the text was published
+  -- PRIMARY KEY (objectID, textType)  -- composite primary key
 );
 
 CREATE TABLE preferred_locations (
