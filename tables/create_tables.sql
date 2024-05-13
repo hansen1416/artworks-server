@@ -62,7 +62,8 @@ CREATE TABLE constituents (
 
 CREATE TABLE constituents_altnames (
   altnameid SERIAL PRIMARY KEY,  -- primary key (auto-increment)
-  constituentid INTEGER NOT NULL REFERENCES constituents(constituentID), -- foreign key to constituents table
+  -- constituentid INTEGER NOT NULL REFERENCES constituents(constituentID), -- foreign key to constituents table
+  constituentid INTEGER NOT NULL, -- foreign key to constituents table
   lastname VARCHAR(256),        -- alternate last name
   displayname VARCHAR(256),       -- alternate display name
   forwarddisplayname VARCHAR(256), -- alternate display name forwards direction
@@ -70,7 +71,8 @@ CREATE TABLE constituents_altnames (
 );
 
 CREATE TABLE constituents_text_entries (
-  constituentID INTEGER NOT NULL REFERENCES constituents(constituentID), -- foreign key to constituents table
+  -- constituentID INTEGER NOT NULL REFERENCES constituents(constituentID), -- foreign key to constituents table
+  constituentID INTEGER NOT NULL, -- foreign key to constituents table
   text TEXT NOT NULL,  -- the text itself
   textType VARCHAR(32) NOT NULL,  -- text type
   year VARCHAR(4) NULL  -- the year the text was published
@@ -104,29 +106,35 @@ CREATE TABLE media_items (
 );
 
 CREATE TABLE media_relationships (
-  mediaID BIGINT NOT NULL REFERENCES media_items(mediaID),  -- foreign key to media_items table
+  -- mediaID BIGINT NOT NULL REFERENCES media_items(mediaID),  -- foreign key to media_items table
+  mediaID BIGINT NOT NULL,  -- foreign key to media_items table
   relatedID BIGINT NOT NULL,
   relatedEntity VARCHAR(32) NOT NULL,
   PRIMARY KEY (mediaID, relatedID, relatedEntity)
 );
 
 CREATE TABLE object_associations (
-  parentObjectID INTEGER NOT NULL REFERENCES objects(objectID),  -- foreign key to objects table
-  childObjectID INTEGER NOT NULL REFERENCES objects(objectID),  -- foreign key to objects table
+  -- parentObjectID INTEGER NOT NULL REFERENCES objects(objectID),  -- foreign key to objects table
+  parentObjectID INTEGER NOT NULL,  -- foreign key to objects table
+  -- childObjectID INTEGER NOT NULL REFERENCES objects(objectID),  -- foreign key to objects table
+  childObjectID INTEGER NOT NULL,  -- foreign key to objects table
   relationship VARCHAR(32) NOT NULL,
   PRIMARY KEY (parentObjectID, childObjectID, relationship)
 );
 
 CREATE TABLE objects_altnums (
-  objectid INTEGER NOT NULL REFERENCES objects(objectID),  -- foreign key to objects table
+  -- objectid INTEGER NOT NULL REFERENCES objects(objectID),  -- foreign key to objects table
+  objectid INTEGER NOT NULL,  -- foreign key to objects table
   altnumtype VARCHAR(64) NOT NULL,
   altnum VARCHAR(64) NOT NULL,
   PRIMARY KEY (objectid, altnumtype, altnum)
 );
 
 CREATE TABLE objects_constituents (
-  objectID INTEGER NOT NULL REFERENCES objects(objectID),  -- foreign key to objects table
-  constituentID INTEGER NOT NULL REFERENCES constituents(constituentID),  -- foreign key to constituents table
+  -- objectID INTEGER NOT NULL REFERENCES objects(objectID),  -- foreign key to objects table
+  objectID INTEGER NOT NULL,  -- foreign key to objects table
+  -- constituentID INTEGER NOT NULL REFERENCES constituents(constituentID),  -- foreign key to constituents table
+  constituentID INTEGER NOT NULL,  -- foreign key to constituents table
   displayOrder INTEGER NOT NULL,
   roleType VARCHAR(64) NOT NULL,
   role VARCHAR(64) NOT NULL,
@@ -141,7 +149,8 @@ CREATE TABLE objects_constituents (
 );
 
 CREATE TABLE objects_dimensions (
-  objectID INTEGER NOT NULL REFERENCES objects(objectID),  -- foreign key to objects table
+  -- objectID INTEGER NOT NULL REFERENCES objects(objectID),  -- foreign key to objects table
+  objectID INTEGER NOT NULL,  -- foreign key to objects table
   element VARCHAR(32) NOT NULL,
   dimensionType VARCHAR(32) NOT NULL,
   dimension DECIMAL(22, 10) NOT NULL,
@@ -151,7 +160,8 @@ CREATE TABLE objects_dimensions (
 
 CREATE TABLE objects_historical_data (
   dataType VARCHAR(32) NOT NULL,
-  objectID INTEGER NOT NULL REFERENCES objects(objectID),  -- foreign key to objects table
+  -- objectID INTEGER NOT NULL REFERENCES objects(objectID),  -- foreign key to objects table
+  objectID INTEGER NOT NULL,  -- foreign key to objects table
   displayOrder INTEGER NOT NULL,
   forwardText VARCHAR NULL,
   invertedText VARCHAR NULL,
@@ -163,7 +173,8 @@ CREATE TABLE objects_historical_data (
 
 CREATE TABLE objects_terms (
   termID INTEGER NOT NULL,
-  objectID INTEGER NOT NULL REFERENCES objects(objectID),  -- foreign key to objects table
+  -- objectID INTEGER NOT NULL REFERENCES objects(objectID),  -- foreign key to objects table
+  objectID INTEGER NOT NULL,  -- foreign key to objects table
   termType VARCHAR(64) NOT NULL,
   term VARCHAR(256) NULL,
   visualBrowserTheme VARCHAR(32) NULL,
@@ -172,7 +183,8 @@ CREATE TABLE objects_terms (
 );
 
 CREATE TABLE objects_text_entries (
-  objectID INTEGER NOT NULL REFERENCES objects(objectID),  -- foreign key to objects table
+  -- objectID INTEGER NOT NULL REFERENCES objects(objectID),  -- foreign key to objects table
+  objectID INTEGER NOT NULL,  -- foreign key to objects table
   text TEXT NOT NULL,  -- the text itself
   textType VARCHAR(32) NOT NULL,  -- text type
   year VARCHAR(4) NULL,  -- the year the text was published
@@ -187,12 +199,15 @@ CREATE TABLE preferred_locations (
   mapImageURL VARCHAR(1024) NULL,
   mapShapeType VARCHAR(32) NULL,
   mapShapeCoords VARCHAR(1024) NULL,
-  partof VARCHAR(32) REFERENCES preferred_locations(locationKey)  -- foreign key referencing itself
+  -- partof VARCHAR(32) REFERENCES preferred_locations(locationKey)  -- foreign key referencing itself
+  partof VARCHAR(32) NULL  -- foreign key referencing itself
 );
 
 CREATE TABLE preferred_locations_tms_locations (
-  preferredLocationKey VARCHAR(32) NOT NULL REFERENCES preferred_locations(locationKey),  -- foreign key to preferred_locations table
-  tmsLocationID INTEGER NOT NULL REFERENCES locations(locationID),  -- foreign key to locations table
+  -- preferredLocationKey VARCHAR(32) NOT NULL REFERENCES preferred_locations(locationKey),  -- foreign key to preferred_locations table
+  preferredLocationKey VARCHAR(32) NOT NULL,  -- foreign key to preferred_locations table
+  -- tmsLocationID INTEGER NOT NULL REFERENCES locations(locationID),  -- foreign key to locations table
+  tmsLocationID INTEGER NOT NULL,  -- foreign key to locations table
   PRIMARY KEY (preferredLocationKey, tmsLocationID)  -- composite primary key
 );
 
@@ -207,7 +222,8 @@ CREATE TABLE published_images (
   maxpixels INTEGER NULL,                -- limit for fair use doctrine
   created TIMESTAMP WITH TIME ZONE NULL,  -- creation date of source image
   modified TIMESTAMP WITH TIME ZONE NULL, -- modification date of metadata
-  depictstmsobjectid INTEGER REFERENCES objects(objectID), -- foreign key to objects table (optional)
+  -- depictstmsobjectid INTEGER REFERENCES objects(objectID), -- foreign key to objects table (optional)
+  depictstmsobjectid INTEGER NULL, -- foreign key to objects table (optional)
   assistivetext TEXT NULL                -- text for visually impaired
 );
 
@@ -219,8 +235,8 @@ CREATE TABLE published_images (
 
 -- psql -d "dbname='postgres' user='postgres' password='yourPasswd' host='localhost'" -f yourFileName.sql
 
--- DROP SCHEMA public CASCADE;
--- CREATE SCHEMA public;
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
      
--- GRANT ALL ON SCHEMA public TO postgres;
--- GRANT ALL ON SCHEMA public TO public;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO public;
