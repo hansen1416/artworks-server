@@ -21,6 +21,9 @@ def clean_row(row, column_names, column_attributes):
             else:
                 row[i] = 0
 
+        if data == "" and col_attr[0] == "timestamp with time zone":
+            row[i] = None
+
     return row
 
 
