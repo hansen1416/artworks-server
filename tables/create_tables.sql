@@ -161,8 +161,7 @@ CREATE TABLE objects (
 );
 
 CREATE TABLE objects_terms (
-  termID INTEGER NOT NULL REFERENCES terms_used(termID)  -- foreign key to terms_used table
-                      REFERENCES terms_all(termID),  -- and terms_all table
+  termID INTEGER NOT NULL PRIMARY KEY,  -- primary key
   objectID INTEGER NOT NULL REFERENCES objects(objectID),  -- foreign key to objects table
   termType VARCHAR(64) NOT NULL,
   term VARCHAR(256) NULL,
