@@ -66,7 +66,10 @@ def home():
     cur.close()
     conn.close()
 
+    # remote the t1.,t2. prefix from columns
+    columns_clean = [column.split(".")[1] for column in columns]
+
     # zip columns and each item in data to create a dictionary
-    results = [dict(zip(columns, item)) for item in data]
+    results = [dict(zip(columns_clean, item)) for item in data]
 
     return {"data": results}
