@@ -235,8 +235,8 @@ CREATE TABLE published_images (
 
 -- psql -d "dbname='postgres' user='postgres' password='yourPasswd' host='localhost'" -f yourFileName.sql
 
-DROP SCHEMA public CASCADE;
-CREATE SCHEMA public;
+-- DROP SCHEMA public CASCADE;
+-- CREATE SCHEMA public;
      
-GRANT ALL ON SCHEMA public TO postgres;
-GRANT ALL ON SCHEMA public TO public;
+-- GRANT ALL ON SCHEMA public TO postgres;
+-- GRANT ALL ON SCHEMA public TO public;
