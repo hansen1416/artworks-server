@@ -150,10 +150,10 @@ if __name__ == "__main__":
     files_arr.remove("objects.csv")
     files_arr.insert(0, "objects.csv")
 
-    # search the position of `media_items.csv` in the list
-    media_items_index = files_arr.index("objects_text_entries.csv")
-    # keep only the files after `media_items.csv`
-    files_arr = files_arr[media_items_index:]
+    # # search the position of `media_items.csv` in the list
+    # media_items_index = files_arr.index("objects_text_entries.csv")
+    # # keep only the files after `media_items.csv`
+    # files_arr = files_arr[media_items_index:]
 
     # list all the files in the directory
     for file in files_arr:
