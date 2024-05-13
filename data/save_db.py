@@ -136,6 +136,15 @@ def postgres_connection():
 if __name__ == "__main__":
 
     # for postgreSQL database credentials can be written as
+    """
+    sudo -u postgres psql
+
+    ALTER USER postgres WITH PASSWORD 'new_password';
+
+    psql -h 127.0.0.1 -U postgres
+
+
+    """
 
     file_path = "objects.csv"
     file_path = "published_images.csv"
