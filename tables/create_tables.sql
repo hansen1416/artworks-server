@@ -167,7 +167,7 @@ CREATE TABLE objects_historical_data (
   invertedText VARCHAR NULL,
   remarks VARCHAR NULL,
   effectiveDate VARCHAR(10) NULL,
-  PRIMARY KEY (objectID, dataType, displayOrder)  -- composite primary key
+  -- PRIMARY KEY (objectID, dataType, displayOrder)  -- composite primary key
 );
 
 
