@@ -35,7 +35,7 @@ CREATE TABLE objects (
 );
 
 CREATE TABLE alternative_identifiers (
-  uuid VARCHAR(64) NOT NULL PRIMARY KEY,  -- universally unique identifier
+  uuid VARCHAR(64) NOT NULL,  -- universally unique identifier
   idschemelabel VARCHAR(64) NOT NULL,      -- key name for identification scheme
   identifier VARCHAR(64) NOT NULL          -- The value of the identifier
 );
