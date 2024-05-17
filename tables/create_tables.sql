@@ -233,7 +233,7 @@ CREATE TABLE published_images (
 
 -- psql -h 127.0.0.1 -U postgres
 
--- psql -d "dbname='postgres' user='postgres' password='yourPasswd' host='localhost'" -f yourFileName.sql
+-- psql -d "dbname='artwork' user='postgres' password='yourPasswd' host='localhost'" -f tables/create_tables.sql
 
 -- DROP SCHEMA public CASCADE;
 -- CREATE SCHEMA public;
