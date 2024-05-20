@@ -11,6 +11,7 @@ Welcome to artworks-server's documentation!
    :caption: Contents:
 
    modules
+   
 
 
 Indices and tables

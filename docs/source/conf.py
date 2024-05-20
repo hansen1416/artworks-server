@@ -12,7 +12,7 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath("../../src"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 sys.setrecursionlimit(1500)
 
 # -- Project information -----------------------------------------------------
