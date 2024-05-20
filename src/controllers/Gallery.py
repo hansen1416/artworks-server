@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-from services.Database import Database
+from src.services.Database import Database
 
 GalleryController = Blueprint("Gallery", __name__)
 
