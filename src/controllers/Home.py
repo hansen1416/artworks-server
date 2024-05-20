@@ -8,29 +8,62 @@ HomeController = Blueprint("Home", __name__)
 @HomeController.get("/home")
 def home():
     """
-    Ancient Art:
+    Ancient Art: This period is vast and can vary depending on the specific civilization. A common range used for Western art history is 3500 BC to 476 AD.
 
-    This period is vast and can vary depending on the specific civilization. A common range used for Western art history is 3500 BC to 476 AD.
+    Medieval Art: This period follows the fall of the Western Roman Empire. A general range is 476 AD to 1400 AD.
 
-    Medieval Art:
+    Renaissance Art: Marking a rebirth of classical ideals, the Renaissance is roughly 1400 AD to 1600 AD.
 
-    This period follows the fall of the Western Roman Empire. A general range is 476 AD to 1400 AD.
+    Baroque Art: The Baroque period is known for its drama, emotion, and movement. It falls within 1600 AD to 1750 AD.
 
-    Renaissance Art:
+    Modern Art: Modern art encompasses a wide range of styles that broke away from traditional forms. A common range is 1860s to 1970s.
 
-    Marking a rebirth of classical ideals, the Renaissance is roughly 1400 AD to 1600 AD.
+    Contemporary Art: Contemporary art refers to art created in the recent past and present. It's generally considered to be from the 1970s to present day.
 
-    Baroque Art:
+    Returns:
+        data (dict): A dictionary containing the data for each category.
 
-    The Baroque period is known for its drama, emotion, and movement. It falls within 1600 AD to 1750 AD.
+            category (str): The name of the art category, one of Ancient, Medieval, Renaissance, Baroque, Modern, or Contemporary.
 
-    Modern Art:
+            data (list): A list of dictionaries containing the data for each artwork in the category.
 
-    Modern art encompasses a wide range of styles that broke away from traditional forms. A common range is 1860s to 1970s.
+                attribution: The authorship or origin of the artwork.
 
-    Contemporary Art:
+                beginYear: The start year of the artwork.
 
-    Contemporary art refers to art created in the recent past and present. It's generally considered to be from the 1970s to present day.
+                classification: The category or type of artwork.
+
+                depictstmsobjectid: The object ID of the artwork in published_images table.
+
+                dimensions: The size or measurements of the artwork.
+
+                displayDate: The date or period of the artwork displayed.
+
+                endYear: The end year of the artwork.
+
+                height: The height of the artwork.
+
+                iiifThumbURL: The IIIF thumbnail URL of the artwork, erplace the `width,height` in the url to get diesired size.
+
+                iiifURL: The IIIF URL of the artwork.
+
+                inscription: Any inscriptions or text on the artwork.
+
+                medium: The materials used to create the artwork.
+
+                objectID: The object ID of the artwork in objects table.
+
+                sequence: The sequence number of the artwork.
+
+                title: The title or name of the artwork.
+
+                uuid: The unique identifier of the artwork.
+
+                viewtype: The view type of the artwork.
+
+                width: The width of the artwork.
+
+
     """
 
     years_range = [
