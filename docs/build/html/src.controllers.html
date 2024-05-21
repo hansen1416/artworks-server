@@ -50,45 +50,75 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="src.controllers.Home.home">
 <span class="sig-prename descclassname"><span class="pre">src.controllers.Home.</span></span><span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.controllers.Home.home" title="Link to this definition">¶</a></dt>
-<dd><p>Ancient Art: This period is vast and can vary depending on the specific civilization. A common range used for Western art history is 3500 BC to 476 AD.</p>
-<p>Medieval Art: This period follows the fall of the Western Roman Empire. A general range is 476 AD to 1400 AD.</p>
-<p>Renaissance Art: Marking a rebirth of classical ideals, the Renaissance is roughly 1400 AD to 1600 AD.</p>
-<p>Baroque Art: The Baroque period is known for its drama, emotion, and movement. It falls within 1600 AD to 1750 AD.</p>
-<p>Modern Art: Modern art encompasses a wide range of styles that broke away from traditional forms. A common range is 1860s to 1970s.</p>
-<p>Contemporary Art: Contemporary art refers to art created in the recent past and present. It’s generally considered to be from the 1970s to present day.</p>
+<dd><p>Home page endpoint.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><p>A dictionary containing the data for each category.</p>
-<blockquote>
-<div><p>category (str): The name of the art category, one of Ancient, Medieval, Renaissance, Baroque, Modern, or Contemporary.</p>
-<p>data (list): A list of dictionaries containing the data for each artwork in the category.</p>
-<blockquote>
-<div><p>attribution: The authorship or origin of the artwork.</p>
-<p>beginYear: The start year of the artwork.</p>
-<p>classification: The category or type of artwork.</p>
-<p>depictstmsobjectid: The object ID of the artwork in published_images table.</p>
-<p>dimensions: The size or measurements of the artwork.</p>
-<p>displayDate: The date or period of the artwork displayed.</p>
-<p>endYear: The end year of the artwork.</p>
-<p>height: The height of the artwork.</p>
-<p>iiifThumbURL: The IIIF thumbnail URL of the artwork, erplace the <cite>width,height</cite> in the url to get diesired size.</p>
-<p>iiifURL: The IIIF URL of the artwork.</p>
-<p>inscription: Any inscriptions or text on the artwork.</p>
-<p>medium: The materials used to create the artwork.</p>
-<p>objectID: The object ID of the artwork in objects table.</p>
-<p>sequence: The sequence number of the artwork.</p>
-<p>title: The title or name of the artwork.</p>
-<p>uuid: The unique identifier of the artwork.</p>
-<p>viewtype: The view type of the artwork.</p>
-<p>width: The width of the artwork.</p>
-</div></blockquote>
-</div></blockquote>
-</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>data (dict)</p>
+<dd class="field-odd"><p><p>All the data is wrapped in a <cite>data</cite> key.
+the value in <cite>data</cite> is a list of dictionaries, where each dictionary represents an artwork category.</p>
+<p>Each dictionary contains a <cite>category</cite> which is the name of the art category,
+there are 6 categories in total: Ancient (3500 BC to 476 AD), Medieval (476 AD to 1400 AD),
+Renaissance (1400 AD to 1600 AD), Baroque (1600 AD to 1750 AD), Modern (1860s to 1970s),
+and Contemporary (1970s to present day).
+and a <cite>data</cite> key which contains a list of artworks in that category. The list of items is selected randomly from the database.</p>
+<dl class="simple">
+<dt>The nested <cite>data</cite> contains the following key-value pairs:</dt><dd><ul class="simple">
+<li><p>attribution: The authorship or origin of the artwork.</p></li>
+<li><p>beginYear: The start year of the artwork.</p></li>
+<li><p>classification: The category or type of artwork.</p></li>
+<li><p>depictstmsobjectid: The object ID of the artwork in published_images table.</p></li>
+<li><p>dimensions: The size or measurements of the artwork.</p></li>
+<li><p>displayDate: The date or period of the artwork displayed.</p></li>
+<li><p>endYear: The end year of the artwork.</p></li>
+<li><p>height: The height of the artwork.</p></li>
+<li><p>iiifThumbURL: The IIIF thumbnail URL of the artwork, erplace the <cite>width,height</cite> in the url to get diesired size.</p></li>
+<li><p>iiifURL: The IIIF URL of the artwork.</p></li>
+<li><p>inscription: Any inscriptions or text on the artwork.</p></li>
+<li><p>medium: The materials used to create the artwork.</p></li>
+<li><p>objectID: The object ID of the artwork in objects table.</p></li>
+<li><p>sequence: The sequence number of the artwork.</p></li>
+<li><p>title: The title or name of the artwork.</p></li>
+<li><p>uuid: The unique identifier of the artwork.</p></li>
+<li><p>viewtype: The view type of the artwork.</p></li>
+<li><p>width: The width of the artwork.</p></li>
+</ul>
 </dd>
 </dl>
+</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;Ancient&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;data&quot;</span><span class="p">:[</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;attribution&quot;</span><span class="p">:</span><span class="s2">&quot;Boeotian 3rd Century B.C.&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;beginYear&quot;</span><span class="p">:</span><span class="o">-</span><span class="mi">300</span><span class="p">,</span><span class="s2">&quot;classification&quot;</span><span class="p">:</span><span class="s2">&quot;Sculpture&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;depictstmsobjectid&quot;</span><span class="p">:</span><span class="mi">177238</span><span class="p">,</span>
+                    <span class="s2">&quot;dimensions&quot;</span><span class="p">:</span><span class="s2">&quot;height: 22.9 cm (9 in.)&quot;</span><span class="p">,</span><span class="s2">&quot;displayDate&quot;</span><span class="p">:</span><span class="s2">&quot;3rd century B.C.&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;endYear&quot;</span><span class="p">:</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span>
+                    <span class="s2">&quot;height&quot;</span><span class="p">:</span><span class="mi">9790</span><span class="p">,</span>
+                    <span class="s2">&quot;iiifThumbURL&quot;</span><span class="p">:</span><span class="s2">&quot;https://api.nga.gov/iiif/221217c8-dac5-45b6-948c-743bac837799/full/!200,200/0/default.jpg&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;iiifURL&quot;</span><span class="p">:</span><span class="s2">&quot;https://api.nga.gov/iiif/221217c8-dac5-45b6-948c-743bac837799&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;inscription&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;medium&quot;</span><span class="p">:</span><span class="s2">&quot;terracotta&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;objectID&quot;</span><span class="p">:</span><span class="mi">177238</span><span class="p">,</span>
+                    <span class="s2">&quot;sequence&quot;</span><span class="p">:</span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Standing Woman with Fan&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;uuid&quot;</span><span class="p">:</span><span class="n">null</span><span class="p">,</span>
+                    <span class="s2">&quot;viewtype&quot;</span><span class="p">:</span><span class="s2">&quot;alternate&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;width&quot;</span><span class="p">:</span><span class="mi">6993</span>
+                <span class="p">},</span>
+                <span class="o">...</span>
+            <span class="p">]}</span>
+        <span class="p">},</span>
+        <span class="o">...</span>
+    <span class="p">]</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
