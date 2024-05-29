@@ -10,7 +10,7 @@ def home():
     """
     Home endpoint.
 
-    Get 10 random artworks from the database.
+    Get 50 random artworks from the database.
 
     :return:
         All the data is wrapped in a `data` key.
@@ -92,7 +92,7 @@ def home():
         + f" FROM published_images as t1 "
         + f" left join objects as t2 on t1.depictstmsobjectid = t2.objectID"
         + f" order by random() "
-        + f" limit 10;"
+        + f" limit 50;"
     )
 
     database = Database()
