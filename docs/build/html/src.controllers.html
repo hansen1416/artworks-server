@@ -48,9 +48,9 @@
 <section id="module-src.controllers.Home">
 <span id="src-controllers-home-module"></span><h2>src.controllers.Home module<a class="headerlink" href="#module-src.controllers.Home" title="Link to this heading">¶</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="src.controllers.Home.home">
-<span class="sig-prename descclassname"><span class="pre">src.controllers.Home.</span></span><span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.controllers.Home.home" title="Link to this definition">¶</a></dt>
-<dd><p>Home page endpoint.</p>
+<dt class="sig sig-object py" id="src.controllers.Home.categories">
+<span class="sig-prename descclassname"><span class="pre">src.controllers.Home.</span></span><span class="sig-name descname"><span class="pre">categories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.controllers.Home.categories" title="Link to this definition">¶</a></dt>
+<dd><p>Categories endpoint.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><p>All the data is wrapped in a <cite>data</cite> key.
@@ -116,6 +116,71 @@ and a <cite>data</cite> key which contains a list of artworks in that category. 
         <span class="o">...</span>
     <span class="p">]</span>
     <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.controllers.Home.home">
+<span class="sig-prename descclassname"><span class="pre">src.controllers.Home.</span></span><span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.controllers.Home.home" title="Link to this definition">¶</a></dt>
+<dd><p>Home endpoint.</p>
+<p>Get 10 random artworks from the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>All the data is wrapped in a <cite>data</cite> key.
+the value in <cite>data</cite> is a list of dictionaries, where each dictionary represents an artwork.</p>
+<dl class="simple">
+<dt>Each dictionary contains the following key-value pairs:</dt><dd><ul class="simple">
+<li><p>attribution: The authorship or origin of the artwork.</p></li>
+<li><p>beginYear: The start year of the artwork.</p></li>
+<li><p>classification: The category or type of artwork.</p></li>
+<li><p>depictstmsobjectid: The object ID of the artwork in published_images table.</p></li>
+<li><p>dimensions: The size or measurements of the artwork.</p></li>
+<li><p>displayDate: The date or period of the artwork displayed.</p></li>
+<li><p>endYear: The end year of the artwork.</p></li>
+<li><p>height: The height of the artwork.</p></li>
+<li><p>iiifThumbURL: The IIIF thumbnail URL of the artwork, erplace the <cite>width,height</cite> in the url to get diesired size.</p></li>
+<li><p>iiifURL: The IIIF URL of the artwork.</p></li>
+<li><p>inscription: Any inscriptions or text on the artwork. 题词</p></li>
+<li><p>medium: The materials used to create the artwork.</p></li>
+<li><p>objectID: The object ID of the artwork in objects table.</p></li>
+<li><p>sequence: The sequence number of the artwork.</p></li>
+<li><p>title: The title or name of the artwork.</p></li>
+<li><p>uuid: The unique identifier of the artwork.</p></li>
+<li><p>viewtype: The view type of the artwork.</p></li>
+<li><p>width: The width of the artwork.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+        <span class="s2">&quot;attribution&quot;</span><span class="p">:</span> <span class="s2">&quot;Anne Ger&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;beginYear&quot;</span><span class="p">:</span> <span class="mi">1936</span><span class="p">,</span>
+        <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="s2">&quot;Index of American Design&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;depictstmsobjectid&quot;</span><span class="p">:</span> <span class="mi">25668</span><span class="p">,</span>
+        <span class="s2">&quot;dimensions&quot;</span><span class="p">:</span> <span class="s2">&quot;overall: 22.7 x 27.8 cm (8 15/16 x 10 15/16 in.)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;displayDate&quot;</span><span class="p">:</span> <span class="s2">&quot;c. 1936&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;endYear&quot;</span><span class="p">:</span> <span class="mi">1936</span><span class="p">,</span>
+        <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="mi">3209</span><span class="p">,</span>
+        <span class="s2">&quot;iiifThumbURL&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.nga.gov/iiif/9aa33390-b162-4c9e-87ba-30ab85f8e4d2/full/!200,200/0/default.jpg&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;iiifURL&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.nga.gov/iiif/9aa33390-b162-4c9e-87ba-30ab85f8e4d2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;inscription&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;medium&quot;</span><span class="p">:</span> <span class="s2">&quot;watercolor and graphite on paper&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;objectID&quot;</span><span class="p">:</span> <span class="mi">25668</span><span class="p">,</span>
+        <span class="s2">&quot;sequence&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Shaker Dressmaker&#39;s Counter&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;viewtype&quot;</span><span class="p">:</span> <span class="s2">&quot;primary&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="mi">4190</span>
+        <span class="p">},</span>
+        <span class="o">...</span>
+    <span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
