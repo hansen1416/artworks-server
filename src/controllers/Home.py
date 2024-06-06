@@ -1,6 +1,7 @@
 from flask import Blueprint
 
 from src.services.Database import Database
+from src.constants import YEARS_RANGE
 
 HomeController = Blueprint("Home", __name__)
 
@@ -175,15 +176,6 @@ def categories():
 
     """
 
-    years_range = [
-        ("Ancient", -3500, 476),
-        ("Medieval", 476, 1400),
-        ("Renaissance", 1400, 1600),
-        ("Baroque", 1600, 1750),
-        ("Modern", 1860, 1970),
-        ("Contemporary", 1970, 3000),
-    ]
-
     database = Database()
 
     columns = [
@@ -209,7 +201,7 @@ def categories():
 
     results = []
 
-    for year_range in years_range:
+    for year_range in YEARS_RANGE:
         # select 10 items from each year range randomly
         query = (
             f"SELECT {','.join(columns)}"
@@ -230,9 +222,96 @@ def categories():
         results.append(
             {
                 "category": year_range[0],
+                "category_type": "year",
+                "category_id": year_range[3],
                 "year_range": [year_range[1], year_range[2]],
                 "data": [dict(zip(columns_clean, item)) for item in data],
             }
         )
 
     return {"data": results}
+
+
+@HomeController.get("/category/year/<int:id>")
+def category_year(id):
+    """
+    Category Year endpoint.
+
+    Get 50 random artworks from a specific year range.
+
+    :param id: The year range ID.
+
+    :return:
+        All the data is wrapped in a `data` key.
+        the value in `data` is a list of dictionaries, where each dictionary represents an artwork.
+
+        Each dictionary contains the following key-value pairs:
+            - attribution: The authorship or origin of the artwork.
+            - beginYear: The start year of the artwork.
+            - classification: The category or type of artwork.
+            - depictstmsobjectid: The object ID of the artwork in published_images table.
+            - dimensions: The size or measurements of the artwork.
+            - displayDate: The date or period of the artwork displayed.
+            - endYear: The end year of the artwork.
+            - height: The height of the artwork.
+            - iiifThumbURL: The IIIF thumbnail URL of the artwork, erplace the `width,height` in the url to get diesired size.
+            - iiifURL: The IIIF URL of the artwork.
+            - inscription: Any inscriptions or text on the artwork.
+            - medium: The materials used to create the artwork.
+            - objectID: The object ID of the artwork in objects table.
+            - sequence: The sequence number of the artwork.
+            - title: The title or name of the artwork.
+            - uuid: The unique identifier of the artwork.
+            - viewtype: The view type of the artwork.
+            - width: The width of the artwork.
+    """
+
+    year_range_info = None
+
+    for info in YEARS_RANGE:
+        if info[3] == id:
+            year_range_info = info
+            break
+
+    if year_range_info is None:
+        return {"error": "Invalid year range ID"}
+
+    database = Database()
+
+    columns = [
+        "t1.depictstmsobjectid",
+        "t1.iiifURL",
+        "t1.iiifThumbURL",
+        "t1.viewtype",
+        "t1.sequence",
+        "t1.width",
+        "t1.height",
+        "t2.objectID",
+        "t2.uuid",
+        "t2.title",
+        "t2.displayDate",
+        "t2.beginYear",
+        "t2.endYear",
+        "t2.medium",
+        "t2.dimensions",
+        "t2.inscription",
+        "t2.attribution",
+        "t2.classification",
+    ]
+
+    query = (
+        f"SELECT {','.join(columns)}"
+        + f" FROM published_images as t1 "
+        + f" left join objects as t2 on t1.depictstmsobjectid = t2.objectID"
+        + f" where t2.endYear is not null and t2.endYear != 0 "
+        + f" and t2.endYear >= {year_range_info[1]} and t2.endYear < {year_range_info[2]} "
+        + f" order by random() "
+        + f" limit 50;"
+    )
+
+    data = database.query(query)
+
+    # remote the t1.,t2. prefix from columns
+    columns_clean = [column.split(".")[1] for column in columns]
+
+    return {"data": [dict(zip(columns_clean, item)) for item in data]}
