@@ -5,32 +5,68 @@ from src.services.Database import Database
 GalleryController = Blueprint("Gallery", __name__)
 
 
-@GalleryController.get("/gallery")
-def gallery():
+@GalleryController.get("/object/<object_id>")
+def object_by_id(object_id):
+    """
+    Get a single object by its ID
+
+    :param object_id: The ID of the object
+
+    :return:
+        All the data is wrapped in a `data` key.
+        the value in `data` is a dictionary.
+
+        dictionary contains the following key-value pairs:
+            - attribution: The authorship or origin of the artwork.
+            - beginYear: The start year of the artwork.
+            - classification: The category or type of artwork.
+            - depictstmsobjectid: The object ID of the artwork in published_images table.
+            - dimensions: The size or measurements of the artwork.
+            - displayDate: The date or period of the artwork displayed.
+            - endYear: The end year of the artwork.
+            - iiifThumbURL: The IIIF thumbnail URL of the artwork, erplace the `width,height` in the url to get diesired size.
+            - iiifURL: The IIIF URL of the artwork.
+            - inscription: Any inscriptions or text on the artwork.
+            - medium: The materials used to create the artwork.
+            - objectID: The object ID of the artwork in objects table.
+            - sequence: The sequence number of the artwork.
+            - title: The title or name of the artwork.
+            - uuid: The unique identifier of the artwork.
+            - viewtype: The view type of the artwork.
+            - width: The width of the artwork.
+            - height: The height of the artwork.
+
+
+    """
 
     database = Database()
 
     columns = [
-        "t1.objectID",
-        "t1.uuid",
-        "t1.title",
-        "t1.displayDate",
-        "t1.beginYear",
-        "t1.endYear",
-        "t2.depictstmsobjectid",
-        "t2.iiifURL",
-        "t2.iiifThumbURL",
-        "t2.viewtype",
-        "t2.sequence",
-        "t2.width",
-        "t2.height",
+        "t1.depictstmsobjectid",
+        "t1.iiifURL",
+        "t1.iiifThumbURL",
+        "t1.viewtype",
+        "t1.sequence",
+        "t1.width",
+        "t1.height",
+        "t2.objectID",
+        "t2.uuid",
+        "t2.title",
+        "t2.displayDate",
+        "t2.beginYear",
+        "t2.endYear",
+        "t2.medium",
+        "t2.dimensions",
+        "t2.inscription",
+        "t2.attribution",
+        "t2.classification",
     ]
 
     query = (
         f"SELECT {','.join(columns)}"
-        + f" FROM published_images as t2 "
-        + f" left join objects as t1 on t2.depictstmsobjectid = t1.objectID"
-        + f" limit 10;"
+        + f" FROM published_images as t1 "
+        + f" left join objects as t2 on t1.depictstmsobjectid = t2.objectID"
+        + f" where t2.objectID = {object_id}"
     )
 
     data = database.query(query)

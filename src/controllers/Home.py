@@ -253,7 +253,6 @@ def category_year(id):
             - dimensions: The size or measurements of the artwork.
             - displayDate: The date or period of the artwork displayed.
             - endYear: The end year of the artwork.
-            - height: The height of the artwork.
             - iiifThumbURL: The IIIF thumbnail URL of the artwork, erplace the `width,height` in the url to get diesired size.
             - iiifURL: The IIIF URL of the artwork.
             - inscription: Any inscriptions or text on the artwork.
@@ -264,6 +263,7 @@ def category_year(id):
             - uuid: The unique identifier of the artwork.
             - viewtype: The view type of the artwork.
             - width: The width of the artwork.
+            - height: The height of the artwork.
     """
 
     year_range_info = None
