@@ -147,6 +147,8 @@ def categories():
             "data": [
                 {
                     "category":"Ancient",
+                    "category_type":"year",
+                    "category_id":1,
                     "data":[
                         {
                             "attribution":"Boeotian 3rd Century B.C.",
