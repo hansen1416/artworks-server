@@ -40,9 +40,43 @@
 <section id="module-src.controllers.Gallery">
 <span id="src-controllers-gallery-module"></span><h2>src.controllers.Gallery module<a class="headerlink" href="#module-src.controllers.Gallery" title="Link to this heading">¶</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="src.controllers.Gallery.gallery">
-<span class="sig-prename descclassname"><span class="pre">src.controllers.Gallery.</span></span><span class="sig-name descname"><span class="pre">gallery</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.controllers.Gallery.gallery" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt class="sig sig-object py" id="src.controllers.Gallery.object_by_id">
+<span class="sig-prename descclassname"><span class="pre">src.controllers.Gallery.</span></span><span class="sig-name descname"><span class="pre">object_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.controllers.Gallery.object_by_id" title="Link to this definition">¶</a></dt>
+<dd><p>Get a single object by its ID</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>object_id</strong> – The ID of the object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>All the data is wrapped in a <cite>data</cite> key.
+the value in <cite>data</cite> is a dictionary.</p>
+<dl class="simple">
+<dt>dictionary contains the following key-value pairs:</dt><dd><ul class="simple">
+<li><p>attribution: The authorship or origin of the artwork.</p></li>
+<li><p>beginYear: The start year of the artwork.</p></li>
+<li><p>classification: The category or type of artwork.</p></li>
+<li><p>depictstmsobjectid: The object ID of the artwork in published_images table.</p></li>
+<li><p>dimensions: The size or measurements of the artwork.</p></li>
+<li><p>displayDate: The date or period of the artwork displayed.</p></li>
+<li><p>endYear: The end year of the artwork.</p></li>
+<li><p>iiifThumbURL: The IIIF thumbnail URL of the artwork, erplace the <cite>width,height</cite> in the url to get diesired size.</p></li>
+<li><p>iiifURL: The IIIF URL of the artwork.</p></li>
+<li><p>inscription: Any inscriptions or text on the artwork.</p></li>
+<li><p>medium: The materials used to create the artwork.</p></li>
+<li><p>objectID: The object ID of the artwork in objects table.</p></li>
+<li><p>sequence: The sequence number of the artwork.</p></li>
+<li><p>title: The title or name of the artwork.</p></li>
+<li><p>uuid: The unique identifier of the artwork.</p></li>
+<li><p>viewtype: The view type of the artwork.</p></li>
+<li><p>width: The width of the artwork.</p></li>
+<li><p>height: The height of the artwork.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="module-src.controllers.Home">
@@ -119,6 +153,46 @@ and a <cite>data</cite> key which contains a list of artworks in that category. 
 <span class="p">}</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.controllers.Home.category_year">
+<span class="sig-prename descclassname"><span class="pre">src.controllers.Home.</span></span><span class="sig-name descname"><span class="pre">category_year</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.controllers.Home.category_year" title="Link to this definition">¶</a></dt>
+<dd><p>Category Year endpoint.</p>
+<p>Get 50 random artworks from a specific year range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> – The year range ID.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>All the data is wrapped in a <cite>data</cite> key.
+the value in <cite>data</cite> is a list of dictionaries, where each dictionary represents an artwork.</p>
+<dl class="simple">
+<dt>Each dictionary contains the following key-value pairs:</dt><dd><ul class="simple">
+<li><p>attribution: The authorship or origin of the artwork.</p></li>
+<li><p>beginYear: The start year of the artwork.</p></li>
+<li><p>classification: The category or type of artwork.</p></li>
+<li><p>depictstmsobjectid: The object ID of the artwork in published_images table.</p></li>
+<li><p>dimensions: The size or measurements of the artwork.</p></li>
+<li><p>displayDate: The date or period of the artwork displayed.</p></li>
+<li><p>endYear: The end year of the artwork.</p></li>
+<li><p>iiifThumbURL: The IIIF thumbnail URL of the artwork, erplace the <cite>width,height</cite> in the url to get diesired size.</p></li>
+<li><p>iiifURL: The IIIF URL of the artwork.</p></li>
+<li><p>inscription: Any inscriptions or text on the artwork.</p></li>
+<li><p>medium: The materials used to create the artwork.</p></li>
+<li><p>objectID: The object ID of the artwork in objects table.</p></li>
+<li><p>sequence: The sequence number of the artwork.</p></li>
+<li><p>title: The title or name of the artwork.</p></li>
+<li><p>uuid: The unique identifier of the artwork.</p></li>
+<li><p>viewtype: The view type of the artwork.</p></li>
+<li><p>width: The width of the artwork.</p></li>
+<li><p>height: The height of the artwork.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
