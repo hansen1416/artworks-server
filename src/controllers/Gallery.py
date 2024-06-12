@@ -72,10 +72,13 @@ def object_by_id(object_id):
     data = database.query(query)
     # {'objectid': ('integer', 'NO'), 'uuid': ('character varying', 'YES'), 'accessioned': ('integer', 'NO'),...}
 
+    if not data or len(data) == 0:
+        return {"data": {}}
+
     # remote the t1.,t2. prefix from columns
     columns_clean = [column.split(".")[1] for column in columns]
 
     # zip columns and each item in data to create a dictionary
-    results = [dict(zip(columns_clean, item)) for item in data]
+    results = dict(zip(columns_clean, data[0]))
 
     return {"data": results}
