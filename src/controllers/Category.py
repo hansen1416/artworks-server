@@ -142,6 +142,8 @@ def category_year(id):
     Get 50 random artworks from a specific year range.
 
     :param id: The year range ID.
+    :param page: url get parameter, `page` index of data
+    :param page_size: url get parameter, `page_size` index of data
 
     :return:
         All the data is wrapped in a `data` key.
