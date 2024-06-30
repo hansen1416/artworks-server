@@ -13,7 +13,7 @@ model = genai.GenerativeModel("gemini-1.5-flash")
 
 database = Database()
 
-query = "select attribution, attribution from attributions where description is null or description = '' order by attributionid asc;"
+query = "select attributionid, attribution from attributions where description is null or description = '' order by attributionid asc;"
 
 data = database.query(query)
 
