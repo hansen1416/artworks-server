@@ -33,3 +33,9 @@ class Database:
         self.cur.execute(query)
 
         return self.cur.fetchall()
+
+    def update(self, query):
+
+        self.cur.execute(query)
+
+        self.conn.commit()
