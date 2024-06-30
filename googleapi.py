@@ -39,8 +39,8 @@ for name in data:
 
         database.execute(query)
 
-        # Pause execution for 2 seconds
-        time.sleep(2)
-
     except Exception as e:
         print(f"Error: {e}")
+
+    # Pause execution for 2 seconds
+    time.sleep(3)
