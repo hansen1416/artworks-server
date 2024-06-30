@@ -28,3 +28,5 @@ for name in data:
 
     # save the response to the database, column `description` of table `attributions`
     query = f"update attributions set description = '{response.text}' where attribution = '{name[0]}';"
+
+    database.query(query)
