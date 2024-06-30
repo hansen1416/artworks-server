@@ -240,3 +240,5 @@ CREATE TABLE published_images (
      
 -- GRANT ALL ON SCHEMA public TO postgres;
 -- GRANT ALL ON SCHEMA public TO public;
+
+-- CREATE TABLE  attributions as (select attribution FROM public.objects group by attribution);
