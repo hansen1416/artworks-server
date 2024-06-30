@@ -26,10 +26,10 @@ for name in data:
 
     # break
     # escape the single quotes in the response text
-    response.text = response.text.replace("'", "''")
+    description = response.text.replace("'", "''")
 
     # save the response to the database, column `description` of table `attributions`
-    query = f"update attributions set description = E'{response.text}' where attribution = '{name[0]}';"
+    query = f"update attributions set description = E'{description}' where attribution = '{name[0]}';"
 
     print(f"description saved for {name[0]}, {name[1]}.")
 
