@@ -12,7 +12,10 @@ model = genai.GenerativeModel("gemini-1.5-flash")
 
 database = Database()
 
-query = "select attribution, attribution from attributions order by attributionid asc;"
+query = (
+    "select attribution, attribution from attributions where description is null or description == "
+    " order by attributionid asc;"
+)
 
 data = database.query(query)
 
@@ -33,4 +36,4 @@ for name in data:
 
     print(f"description saved for {name[0]}, {name[1]}.")
 
-    database.query(query)
+    database.execute(query)

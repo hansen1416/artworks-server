@@ -34,7 +34,7 @@ class Database:
 
         return self.cur.fetchall()
 
-    def update(self, query):
+    def execute(self, query):
 
         self.cur.execute(query)
 
