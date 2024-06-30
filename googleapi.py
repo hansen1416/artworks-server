@@ -22,9 +22,9 @@ for name in data:
     response = model.generate_content(
         f"Give me a description of {name[1]}, answer only contains the description itself, no special charasters, not more than 2000 charasters."
     )
-    print(response.text)
+    # print(response.text)
 
-    break
+    # break
 
     # save the response to the database, column `description` of table `attributions`
     query = f"update attributions set description = '{response.text}' where attribution = '{name[0]}';"
