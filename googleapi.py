@@ -24,18 +24,23 @@ for name in data:
     )
     # print(response.text)
 
-    # break
-    # escape the single quotes in the response text
-    description = response.text.replace("'", "''")
+    try:
 
-    # save the response to the database, column `description` of table `attributions`
-    query = f"update attributions set description = E'{description}' where attribution = '{name[0]}';"
+        # break
+        # escape the single quotes in the response text
+        description = response.text.replace("'", "''")
 
-    print(
-        f"description saved for {name[0]}, {name[1]}, description length {len(description)}."
-    )
+        # save the response to the database, column `description` of table `attributions`
+        query = f"update attributions set description = E'{description}' where attribution = '{name[0]}';"
 
-    database.execute(query)
+        print(
+            f"description saved for {name[0]}, {name[1]}, description length {len(description)}."
+        )
+
+        database.execute(query)
+
+    except Exception as e:
+        print(f"Error: {e}")
 
     # Pause execution for 2 seconds
     time.sleep(2)
