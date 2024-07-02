@@ -7,7 +7,35 @@ AttributionController = Blueprint("Attribution", __name__)
 
 @AttributionController.get("/attributions")
 def Attributions():
-    """ """
+    """
+    Get a list of artisits
+
+    :return:
+        All the data is wrapped in a `data` key.
+        the value in `data` is a dictionary.
+
+        dictionary contains the following key-value pairs:
+            - artworks_count: the number of artworks by the artist.
+            - attribution: the name of the artist.
+            - attributionid: the id of the artist.
+            - beginYear: the start year of the artist.
+            - classification: The category or type of artwork.
+            - depictstmsobjectid: The object ID of the artwork in published_images table.
+            - dimensions: The size or measurements of the artwork.
+            - displayDate: The date or period of the artwork displayed.
+            - endYear: The end year of the artwork.
+            - iiifThumbURL: The IIIF thumbnail URL of the artwork, erplace the `width,height` in the url to get diesired size.
+            - iiifURL: The IIIF URL of the artwork.
+            - inscription: Any inscriptions or text on the artwork.
+            - medium: The materials used to create the artwork.
+            - objectID: The object ID of the artwork in objects table.
+            - sequence: The sequence number of the artwork.
+            - title: The title or name of the artwork.
+            - uuid: The unique identifier of the artwork.
+            - viewtype: The view type of the artwork.
+            - width: The width of the artwork.
+            - height: The height of the artwork.
+    """
 
     database = Database()
 
