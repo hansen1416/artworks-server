@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 
 from src.services.Database import Database
 
@@ -9,6 +9,9 @@ AttributionController = Blueprint("Attribution", __name__)
 def Attributions():
     """
     Get a list of artisits
+
+    :param page: url get parameter, `page` index of data
+    :param page_size: url get parameter, `page_size` index of data
 
     :return:
         All the data is wrapped in a `data` key.
@@ -37,6 +40,9 @@ def Attributions():
             - height: The height of the artwork.
     """
 
+    page = request.args.get("page", default=1, type=int)
+    page_size = request.args.get("page_size", default=10, type=int)
+
     database = Database()
 
     columns = ["attributionid", "attribution", "description", "artworks_count"]
@@ -46,7 +52,8 @@ def Attributions():
         + ",".join(columns)
         + " from attributions t1 "
         + " where t1.description is not null and t1.description != '' "
-        + " order by artworks_count desc limit 10"
+        + " order by artworks_count desc "
+        + f" limit {page_size} offset {(page - 1) * page_size}"
     )
 
     data = database.query(query)
