@@ -75,7 +75,7 @@ def generate_objects_description():
     for row in data:
 
         response = model.generate_content(
-            f"Give me a description of {row[1]}, which is an artwork by {row[2]} answer only contains the description itself, no special charasters, not more than 3000 charasters."
+            f"Give me an art Commentary of {row[1]}, which is an artwork by {row[2]} answer only contains the description itself, no special charasters, not more than 3000 charasters."
         )
         # print(response.text)
 
