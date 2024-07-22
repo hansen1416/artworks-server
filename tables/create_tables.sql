@@ -231,7 +231,7 @@ CREATE TABLE published_images (
 
 -- ALTER USER postgres WITH PASSWORD 'new_password';
 
--- psql -h 127.0.0.1 -U postgres
+-- psql -h 127.0.0.1 -U postgres artworks
 
 -- psql -d "dbname='artwork' user='postgres' password='yourPasswd' host='localhost'" -f tables/create_tables.sql
 
@@ -242,3 +242,5 @@ CREATE TABLE published_images (
 -- GRANT ALL ON SCHEMA public TO public;
 
 -- CREATE TABLE  attributions as (select attribution FROM public.objects group by attribution);
+
+-- SELECT column_name, data_type FROM information_schema.columns WHERE table_name = 'published_images' AND table_schema = 'public';
