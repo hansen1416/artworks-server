@@ -65,8 +65,8 @@ def generate_objects_description():
         + f" FROM published_images as t1 "
         + f" left join objects as t2 on t1.depictstmsobjectid = t2.objectID"
         + f" where t2.description is not null and t2.description != '' "
-        + f" and classification in ('Drawing', 'Sculpture', 'Photograph', 'Painting') "
-        + f" and title is not null and title != ''"
+        + f" and t2.classification in ('Drawing', 'Sculpture', 'Photograph', 'Painting') "
+        + f" and t2.title is not null and title != ''"
         + f" order by t2.objectid asc;"
     )
 
