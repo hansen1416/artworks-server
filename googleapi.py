@@ -85,17 +85,14 @@ def generate_objects_description():
             # escape the single quotes in the response text
             description = response.text.replace("'", "''")
 
-            print(description)
-            print("=====================================")
+            # save the response to the database, column `description` of table `objects`
+            query = f"update objects set description = E'{description}' where object = '{row[0]}';"
 
-            # # save the response to the database, column `description` of table `objects`
-            # query = f"update objects set description = E'{description}' where object = '{row[0]}';"
+            print(
+                f"description saved for {row[0]}, {row[1]}, description length {len(description)}."
+            )
 
-            # print(
-            #     f"description saved for {row[0]}, {row[1]}, description length {len(description)}."
-            # )
-
-            # database.execute(query)
+            database.execute(query)
 
         except Exception as e:
             print(f"Error: {e}")
