@@ -66,7 +66,7 @@ def generate_objects_description():
         + f" left join objects as t2 on t1.depictstmsobjectid = t2.objectID"
         + f" where (t2.description is null or t2.description = '') "
         + f" and t2.classification in ('Drawing', 'Sculpture', 'Photograph', 'Painting') "
-        + f" and t2.title is not null and title != ''"
+        + f" and t2.title is not null and t2.title != ''"
         + f" order by t2.objectid asc;"
     )
 
