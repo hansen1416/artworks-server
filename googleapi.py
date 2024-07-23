@@ -86,7 +86,7 @@ def generate_objects_description():
             description = response.text.replace("'", "''")
 
             # save the response to the database, column `description` of table `objects`
-            query = f"update objects set description = E'{description}' where object = '{row[0]}';"
+            query = f"update objects set description = E'{description}' where objectid = '{row[0]}';"
 
             print(
                 f"description saved for {row[0]}, {row[1]}, description length {len(description)}."
