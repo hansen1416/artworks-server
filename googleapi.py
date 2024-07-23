@@ -98,7 +98,7 @@ def generate_objects_description():
             print(f"Error: {e}")
 
         # Pause execution for 2 seconds
-        time.sleep(3)
+        time.sleep(5)
 
 
 if __name__ == "__main__":
