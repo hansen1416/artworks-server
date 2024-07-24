@@ -95,6 +95,11 @@ def generate_objects_description():
             database.execute(query)
 
         except Exception as e:
+
+            query = (
+                f"update objects set description = 'error' where objectid = '{row[0]}';"
+            )
+
             print(f"Error: {e}")
 
         # Pause execution for 2 seconds
