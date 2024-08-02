@@ -31,6 +31,7 @@ def object_by_id(object_id):
             - objectID: The object ID of the artwork in objects table.
             - sequence: The sequence number of the artwork.
             - title: The title or name of the artwork.
+            - description: The description of the artwork.
             - uuid: The unique identifier of the artwork.
             - viewtype: The view type of the artwork.
             - width: The width of the artwork.
@@ -60,6 +61,7 @@ def object_by_id(object_id):
         "t2.inscription",
         "t2.attribution",
         "t2.classification",
+        "t2.description",
     ]
 
     query = (
