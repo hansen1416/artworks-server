@@ -147,9 +147,9 @@ def subject_matter_categorization():
         response = model.generate_content(query)
         # print(response.text)
 
-        category_id = int(response.text)
-
         try:
+
+            category_id = int(response.text)
 
             # break
             # escape the single quotes in the response text
