@@ -6,3 +6,9 @@ YEARS_RANGE = [
     ("Modern", 1860, 1970, 5),
     ("Contemporary", 1970, 3000, 6),
 ]
+
+SUBJECT_MATTER_CATEGORIES = [
+    ("Landscape", 1),
+    ("Portrait", 2),
+    ("Still Life", 3),
+]
