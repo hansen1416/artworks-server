@@ -68,7 +68,7 @@ def generate_objects_description():
         + f" and t2.classification in ('Drawing', 'Sculpture', 'Photograph', 'Painting') "
         + f" and t2.title is not null and t2.title != ''"
         + " group by t2.objectid"
-        + f" order by t2.objectid asc;"
+        + f" order by t2.objectid desc;"
     )
 
     data = database.query(query)
@@ -129,7 +129,7 @@ def subject_matter_categorization():
         # + f" and t2.classification in ('Drawing', 'Sculpture', 'Photograph', 'Painting') "
         # + f" and t2.title is not null and t2.title != ''"
         + " group by t2.objectid"
-        + f" order by t2.objectid asc;"
+        + f" order by t2.objectid desc;"
     )
 
     data = database.query(query)
@@ -175,4 +175,6 @@ def subject_matter_categorization():
 
 if __name__ == "__main__":
 
-    subject_matter_categorization()
+    # subject_matter_categorization()
+
+    generate_objects_description()
