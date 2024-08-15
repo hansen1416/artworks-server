@@ -175,6 +175,6 @@ def subject_matter_categorization():
 
 if __name__ == "__main__":
 
-    # subject_matter_categorization()
+    subject_matter_categorization()
 
-    generate_objects_description()
+    # generate_objects_description()
