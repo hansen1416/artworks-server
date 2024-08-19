@@ -12,3 +12,10 @@ SUBJECT_MATTER_CATEGORIES = [
     ("Portrait", 2),
     ("Still Life", 3),
 ]
+
+CLASSES_CATEGORIES = [
+    ("Drawing", 1),
+    ("Sculpture", 2),
+    ("Photograph", 3),
+    ("Painting", 4),
+]
