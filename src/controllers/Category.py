@@ -450,7 +450,7 @@ def category_subject(id):
 
 
 @CategoryController.get("/categories/classes")
-def categories_classes():
+def categories_classifications():
     """
     Categories endpoint.
 
@@ -578,3 +578,95 @@ def categories_classes():
         )
 
     return {"data": results}
+
+
+@CategoryController.get("/category/classes/<int:id>")
+def category_classification(id):
+    """
+    Category Year endpoint.
+
+    Get 50 random artworks from a specific classification.
+
+    :param id: The classification category_id. ("Painting", 1), ("Drawing", 2), ("Sculpture", 3), ("Photograph", 4)
+    :param page: url get parameter, `page` index of data
+    :param page_size: url get parameter, `page_size` index of data
+
+    :return:
+        All the data is wrapped in a `data` key.
+        the value in `data` is a list of dictionaries, where each dictionary represents an artwork.
+
+        Each dictionary contains the following key-value pairs:
+            - attribution: The authorship or origin of the artwork.
+            - beginYear: The start year of the artwork.
+            - classification: The category or type of artwork.
+            - depictstmsobjectid: The object ID of the artwork in published_images table.
+            - dimensions: The size or measurements of the artwork.
+            - displayDate: The date or period of the artwork displayed.
+            - endYear: The end year of the artwork.
+            - iiifThumbURL: The IIIF thumbnail URL of the artwork, erplace the `width,height` in the url to get diesired size.
+            - iiifURL: The IIIF URL of the artwork.
+            - inscription: Any inscriptions or text on the artwork.
+            - medium: The materials used to create the artwork.
+            - objectID: The object ID of the artwork in objects table.
+            - sequence: The sequence number of the artwork.
+            - title: The title or name of the artwork.
+            - uuid: The unique identifier of the artwork.
+            - viewtype: The view type of the artwork.
+            - width: The width of the artwork.
+            - height: The height of the artwork.
+            - subject_matter_category_id: 1. landscape, 2. portrait, 3. still life
+    """
+
+    page = request.args.get("page", default=1, type=int)
+    page_size = request.args.get("page_size", default=10, type=int)
+
+    classification_info = None
+
+    for classification, class_id in CLASSES_CATEGORIES:
+        if class_id == id:
+            classification_info = classification
+            break
+
+    if classification_info is None:
+        return {"error": "Invalid classification category id"}
+
+    database = Database()
+
+    columns = [
+        "t1.depictstmsobjectid",
+        "t1.iiifURL",
+        "t1.iiifThumbURL",
+        "t1.viewtype",
+        "t1.sequence",
+        "t1.width",
+        "t1.height",
+        "t2.objectID",
+        "t2.uuid",
+        "t2.title",
+        "t2.displayDate",
+        "t2.beginYear",
+        "t2.endYear",
+        "t2.medium",
+        "t2.dimensions",
+        "t2.inscription",
+        "t2.attribution",
+        "t2.classification",
+        "t2.subject_matter_category_id",
+    ]
+
+    query = (
+        f"SELECT {','.join(columns)}"
+        + f" FROM published_images as t1 "
+        + f" left join objects as t2 on t1.depictstmsobjectid = t2.objectID"
+        + f" where t2.classification = '{classification_info}' "
+        + f" and t2.description is not null and t2.description != '' "
+        + f" order by t2.objectID asc "
+        + f" limit {page_size} offset {(page - 1) * page_size}"
+    )
+
+    data = database.query(query)
+
+    # remote the t1.,t2. prefix from columns
+    columns_clean = [column.split(".")[1] for column in columns]
+
+    return {"data": [dict(zip(columns_clean, item)) for item in data]}

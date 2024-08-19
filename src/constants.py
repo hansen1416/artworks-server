@@ -14,8 +14,8 @@ SUBJECT_MATTER_CATEGORIES = [
 ]
 
 CLASSES_CATEGORIES = [
-    ("Drawing", 1),
-    ("Sculpture", 2),
-    ("Photograph", 3),
-    ("Painting", 4),
+    ("Painting", 1),
+    ("Drawing", 2),
+    ("Sculpture", 3),
+    ("Photograph", 4),
 ]
